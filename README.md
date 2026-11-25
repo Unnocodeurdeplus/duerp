@@ -2,22 +2,41 @@
 
 **Français** · [English](#english)
 
-Un outil libre pour aider les employeurs français à rédiger et tenir à jour leur DUERP (document unique d'évaluation des risques professionnels), simplement et sans consultant.
+Un outil libre pour aider les employeurs français à rédiger et tenir à jour leur DUERP (document unique d'évaluation des risques professionnels), simplement, sans consultant, et sans que leurs données quittent leur poste.
+
+> **État : projet en démarrage.** Pas encore de code utilisable. Ce document décrit le but et l'architecture prévue ; le dépôt se remplira au fil du travail.
 
 ## Pourquoi
 
-Tout employeur en France, dès le premier salarié, doit évaluer les risques professionnels et les consigner dans un document unique (Code du travail, articles R4121-1 et suivants). Beaucoup de petites entreprises trouvent l'exercice confus, paient un consultant, ou ne le font pas. Le risque chimique est souvent le plus difficile : il faut lire les fiches de données de sécurité (FDS) des fournisseurs et en tirer une évaluation.
+Tout employeur en France, dès le premier salarié, doit évaluer les risques professionnels et les consigner dans un document unique, mis à jour au moins une fois par an dans les entreprises de 11 salariés et plus (Code du travail, articles R4121-1 et suivants). Beaucoup de petites entreprises trouvent l'exercice confus, paient un consultant, ou ne le font pas.
 
-## Objectifs
+Le risque chimique est souvent la partie la plus difficile : il faut lire les fiches de données de sécurité (FDS) des fournisseurs et en tirer une évaluation.
 
-- Un outil très simple, utilisable par un employeur sans aide.
-- Une analyse des risques que chaque entreprise peut adapter à sa réalité, plutôt qu'un modèle générique à remplir.
-- À terme, une intégration avec La Suite numérique, la suite d'outils libres de l'État.
-- Des guides et tutoriels pour que des personnes non techniques maîtrisent l'outil.
+## Ce que l'outil veut offrir
 
-## État
+- **Simple** : un employeur sans formation en prévention doit pouvoir faire son DUERP seul, guidé pas à pas.
+- **Adaptable** : chaque entreprise part d'une base par métier et l'ajuste à sa réalité (unités de travail, risques, cotation, mesures), plutôt que de remplir un modèle générique.
+- **Confidentiel** : les calculs tournent dans le navigateur ; les données de l'entreprise restent chez elle.
+- **Traçable** : chaque changement du document est daté et conservé, pour garder l'historique des versions successives.
+- **Ouvert sur les outils publics** : à terme, une intégration avec La Suite numérique, la suite d'outils libres de l'État.
+- **Accompagné** : guides et tutoriels pour que des personnes non techniques maîtrisent l'outil.
 
-Projet en démarrage : pas encore de code utilisable. Le dépôt sera rempli au fil du travail.
+## Architecture prévue
+
+| Partie | Technologie | Pourquoi |
+|---|---|---|
+| Cœur : modèle de risque, cotation, historique, lecture des FDS | Rust compilé en WebAssembly | fiabilité d'un document légal, exécution locale dans le navigateur, un seul exécutable pour l'auto-hébergement |
+| Interface | TypeScript / React, design de l'État (DSFR) | rapidité de développement, cohérence avec les outils publics |
+| Contenu : risques par métier, mesures de prévention | fichiers YAML / CSV | lisibles et modifiables par des préventeurs, sans savoir programmer |
+
+## Contribuer
+
+Le projet aura besoin de deux sortes de contributions :
+
+- **Contenu** (préventeurs, QHSE, services de santé au travail) : catalogues de risques par métier, mesures de prévention, relecture des guides.
+- **Code** (Rust, TypeScript).
+
+Les modalités de contribution (dont un accord de contribution) seront publiées avant l'ouverture aux contributions extérieures.
 
 ## Responsabilité
 
@@ -35,22 +54,41 @@ La licence porte sur le code, pas sur les noms ni les logos du projet.
 
 ## English
 
-A free and open-source tool to help French employers write and maintain their DUERP (*document unique d'évaluation des risques professionnels*, the mandatory written workplace risk assessment), simply and without a consultant.
+A free and open-source tool to help French employers write and maintain their DUERP (*document unique d'évaluation des risques professionnels*, the mandatory written workplace risk assessment): simply, without a consultant, and without their data leaving their computer.
+
+> **Status: early stage.** No usable code yet. This document describes the goal and the planned architecture; the repository will grow as work progresses.
 
 ### Why
 
-Every employer in France must assess workplace risks and record them in a single document (French Labour Code, article R4121-1 and following). Many small businesses find it confusing, pay a consultant, or skip it. Chemical risk is often the hardest part: it means reading suppliers' Safety Data Sheets (SDS) and turning them into an assessment.
+Every employer in France, from the first employee, must assess workplace risks and record them in a single document, updated at least yearly in companies with 11 or more employees (French Labour Code, article R4121-1 and following). Many small businesses find it confusing, pay a consultant, or skip it.
 
-### Goals
+Chemical risk is often the hardest part: it means reading suppliers' Safety Data Sheets (SDS) and turning them into an assessment.
 
-- A very simple tool any employer can use without help.
-- A risk analysis each company can adapt to its own situation, instead of a generic template.
-- Eventually, integration with La Suite numérique, the French government's open-source workplace suite.
-- Guides and tutorials so non-technical people can master the tool.
+### What the tool aims to offer
 
-### Status
+- **Simple**: an employer with no health-and-safety training can write their DUERP alone, guided step by step.
+- **Adaptable**: each company starts from a trade-specific base and adjusts it to its own situation (work units, risks, scoring, measures), instead of filling in a generic template.
+- **Private**: computation runs in the browser; the company's data stays with the company.
+- **Traceable**: every change to the document is dated and kept, preserving the history of successive versions.
+- **Open to public tools**: eventually, integration with La Suite numérique, the French government's open-source workplace suite.
+- **Supported**: guides and tutorials so non-technical people can master the tool.
 
-Early stage: no usable code yet. The repository will grow as work progresses.
+### Planned architecture
+
+| Part | Technology | Why |
+|---|---|---|
+| Core: risk model, scoring, history, SDS reading | Rust compiled to WebAssembly | reliability for a legal document, local execution in the browser, single binary for self-hosting |
+| Interface | TypeScript / React, French government design system (DSFR) | development speed, consistency with public tools |
+| Content: risks by trade, prevention measures | YAML / CSV files | readable and editable by health-and-safety professionals without coding |
+
+### Contributing
+
+The project will need two kinds of contributions:
+
+- **Content** (health-and-safety professionals, occupational health services): risk catalogues by trade, prevention measures, guide reviews.
+- **Code** (Rust, TypeScript).
+
+Contribution terms (including a contributor agreement) will be published before the project opens to outside contributions.
 
 ### Responsibility
 
